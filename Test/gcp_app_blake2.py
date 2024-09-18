@@ -248,87 +248,87 @@ def download_file(hash_value):
         return jsonify({"error": str(e)}), 404
 
 
-@app.route('/keyed', methods=['POST'])
-def keyed():
-    text = "\x00\x01"
-    key = "whats the Elvish word for friend"
+# @app.route('/keyed', methods=['POST'])
+# def keyed():
+#     text = "\x00\x01"
+#     key = "whats the Elvish word for friend"
 
-    text_bytes = text.encode('utf-8')
-    key_bytes = key.encode('utf-8')
-    hash_value = blake3_keyed_hash(text_bytes, key_bytes)
+#     text_bytes = text.encode('utf-8')
+#     key_bytes = key.encode('utf-8')
+#     hash_value = blake3_keyed_hash(text_bytes, key_bytes)
     
-    return jsonify({
-        "text": text,
-        "key": key,
-        "hash_value": hash_value
-    })
+#     return jsonify({
+#         "text": text,
+#         "key": key,
+#         "hash_value": hash_value
+#     })
     
-@app.route('/regular', methods=['POST'])
-def reguler():
-    text = "\x00\x01"
+# @app.route('/regular', methods=['POST'])
+# def reguler():
+#     text = "\x00\x01"
     
-    text_bytes = text.encode('utf-8')
-    hash_value = blake3_regular_hash(text_bytes)
+#     text_bytes = text.encode('utf-8')
+#     hash_value = blake3_regular_hash(text_bytes)
     
-    return jsonify({
-        "text": text,
-        "hash_value": hash_value
-    })
+#     return jsonify({
+#         "text": text,
+#         "hash_value": hash_value
+#     })
     
-@app.route('/derived', methods=['POST'])
-def derive():
-    text = "\x00\x01"
-    context = "BLAKE3 2019-12-27 16:29:52 test vectors context"
+# @app.route('/derived', methods=['POST'])
+# def derive():
+#     text = "\x00\x01"
+#     context = "BLAKE3 2019-12-27 16:29:52 test vectors context"
     
-    text_bytes = text.encode('utf-8')
-    hash_value = blake3_derive_keyed_hash(text_bytes, context)
+#     text_bytes = text.encode('utf-8')
+#     hash_value = blake3_derive_keyed_hash(text_bytes, context)
     
-    return jsonify({
-        "text": text,
-        "context": context,
-        "hash_value": hash_value
-    })
+#     return jsonify({
+#         "text": text,
+#         "context": context,
+#         "hash_value": hash_value
+#     })
 
-@app.route('/test-second-preimage-regular', methods=['POST'])
-def test_second_preimage_regular():
-    message = "ini adalah pesan rahasia"
+# @app.route('/test-second-preimage-regular', methods=['POST'])
+# def test_second_preimage_regular():
+#     message = "ini adalah pesan rahasia"
     
-    message_bytes = message.encode('utf-8')
-    hash_value = blake3_regular_hash(message_bytes)
+#     message_bytes = message.encode('utf-8')
+#     hash_value = blake3_regular_hash(message_bytes)
     
-    return jsonify({
-        "message": message,
-        "hash_value": hash_value
-    })
+#     return jsonify({
+#         "message": message,
+#         "hash_value": hash_value
+#     })
 
-@app.route('/test-second-preimage-keyed', methods=['POST'])
-def test_second_preimage_keyed():
-    message = "ini adalah pesan rahasia"
-    key = "9ce463671338a2a2966dd8470296daa5"
+# @app.route('/test-second-preimage-keyed', methods=['POST'])
+# def test_second_preimage_keyed():
+#     message = "ini adalah pesan rahasia"
+#     key = "9ce463671338a2a2966dd8470296daa5"
 
-    message_bytes = message.encode('utf-8')
-    key_bytes = key.encode('utf-8')
-    hash_value = blake3_keyed_hash(message_bytes, key_bytes)
+#     message_bytes = message.encode('utf-8')
+#     key_bytes = key.encode('utf-8')
+#     hash_value = blake3_keyed_hash(message_bytes, key_bytes)
     
-    return jsonify({
-        "message": message,
-        "hash_value": hash_value,
-        "key": key
-    })
+#     return jsonify({
+#         "message": message,
+#         "hash_value": hash_value,
+#         "key": key
+#     })
 
-@app.route('/test-second-preimage-derive-keyed', methods=['POST'])
-def test_second_preimage_derive_keyed():
-    message = "ini adalah pesan rahasia"
-    context = "blake3 2024-08-20 12:00:00 test second preimage"
+# @app.route('/test-second-preimage-derive-keyed', methods=['POST'])
+# def test_second_preimage_derive_keyed():
+#     message = "ini adalah pesan rahasia"
+#     context = "blake3 2024-08-20 12:00:00 test second preimage"
 
-    message_bytes = message.encode('utf-8')
-    hash_value = blake3_regular_hash(message_bytes)
+#     message_bytes = message.encode('utf-8')
+#     hash_value = blake3_regular_hash(message_bytes)
     
-    return jsonify({
-        "message": message,
-        "hash_value": hash_value,
-        "context": context
-    })
+#     return jsonify({
+#         "message": message,
+#         "hash_value": hash_value,
+#         "context": context
+#     })
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=8080)
